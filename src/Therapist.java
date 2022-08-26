@@ -9,7 +9,8 @@ import java.util.Scanner;
 public class Therapist {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int limit = 5;
+        Random rn = new Random();
+        int limit = 3+rn.nextInt(5);
         if(sc.nextLine().toLowerCase().equals("hej"))
         {
             System.out.println("Välkommen till Terapi. Börja prata.");
@@ -21,6 +22,7 @@ public class Therapist {
             String s = sc.nextLine();
             if(!s.equals(""))
             {
+                save(s);
                 respond();
             }
         }
@@ -33,7 +35,7 @@ public class Therapist {
         int lines = 6;
         BufferedReader reader;
         try{
-            reader = new BufferedReader(new FileReader(("C:\\Users\\rasmus.johansson27\\IdeaProjects\\TE20PRG2\\src\\Lines")));
+            reader = new BufferedReader(new FileReader("C:\\Users\\rasmus.johansson27\\IdeaProjects\\TE20PRG2\\src\\Lines"));
             String line = reader.readLine();
             Random rn = new Random();
             int randLine = rn.nextInt(lines);
@@ -42,6 +44,17 @@ public class Therapist {
             }
             System.out.println(line);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    static void save(String s)
+    {
+        BufferedReader reader;
+        try{
+            reader = new BufferedReader(new FileReader("C:\\Users\\rasmus.johansson27\\IdeaProjects\\TE20PRG2\\src\\Lines"));
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
