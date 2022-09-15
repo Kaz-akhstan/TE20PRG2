@@ -1,12 +1,10 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class readWriteRandom {
     public static void main(String[] args) {
         String openFile = "fil.txt";
         String readFile = "binFil.txt";
-        int i = 0;
         ArrayList<Integer>intList = new ArrayList<>();
 
         try {
@@ -15,8 +13,6 @@ public class readWriteRandom {
             while ((x = br.readLine()) != null)
             {
                 intList.add(Integer.parseInt(x));
-                i++;
-                System.out.println(i);
             }
         } catch (IOException e) {
             e.printStackTrace();
