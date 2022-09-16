@@ -14,10 +14,14 @@ public class Crypt {
         ArrayList<Byte>msgByte = new ArrayList<>();
         try {
             DataInputStream openFile = new DataInputStream(new FileInputStream(filename));
-
-        } catch (FileNotFoundException e) {
+            msgByte.add(openFile.readByte());
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        for (int i = 0; i < msgByte.size(); i++) {
+            msg += msgByte.get(i);
+        }
+        System.out.println(msg);
         return msg;
     }
 
@@ -42,7 +46,29 @@ public class Crypt {
         return key;
     }
 
-    private void encrypt(String message, String key) {
+    public String encrypt(String message, String key) {
+        char[] encMsg = new char[message.length()];
+        char[] keyList = new char[message.length()];
+        String msg = "";
 
+        for (int i = 0; i < key.length(); i++) {
+            keyList[i] = key.charAt(i);
+        }
+        for (int i = 0; i < message.length(); i++) {
+            encMsg[i] = (char) (message.charAt(i)^keyList[i]);
+            msg += encMsg[i];
+        }
+        return msg;
+    }
+
+    public void outputToFile(String message, String filename)
+    {
+        DataOutputStream dos;
+        try {
+            dos = new DataOutputStream(new FileOutputStream(filename));
+            dos.writeInt(Integer.parseInt(message));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
